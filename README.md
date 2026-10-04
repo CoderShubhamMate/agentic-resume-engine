@@ -6,6 +6,88 @@ An AI-agent-powered automated resume production pipeline that transforms job des
 
 ---
 
+## How It Works
+
+```mermaid
+flowchart TD
+    A([👤 You paste a Job Description]) --> B[Agent reads JD\nand extracts:\n• Hard skills\n• MQs\n• ATS keywords]
+    B --> C{PRE-mode\nATS Analysis\nmatch_resume.py}
+    C --> D[(Master_Data/\nYour verified facts)]
+    D --> C
+    C --> E[Agent identifies\nVerified Matches ✅\nPartial Matches ⚠️\nTrue Gaps ❌]
+    E --> F[Agent writes\ntailored resume\nresume.tex + resume_render.html]
+    F --> G[Headless Chrome\ncompiles\nresume.pdf\n1-page guaranteed]
+    G --> H{POST-mode\nATS Scoring\nmatch_resume.py}
+    H --> I{Score ≥ 90\nor 3 passes done?}
+    I -- No / needs_revision=true --> J[Revision Pass\nAdd verified_omitted\nskills naturally]
+    J --> G
+    I -- Yes --> K[Build job-match-report.pdf\nBuild .docx\nSync Excel tracker]
+    K --> L([📁 Clean 4-file\nApplication Folder])
+
+    style A fill:#4f46e5,color:#fff
+    style L fill:#16a34a,color:#fff
+    style D fill:#b45309,color:#fff
+    style C fill:#0f172a,color:#fff
+    style H fill:#0f172a,color:#fff
+```
+
+---
+
+## Truth Engine: What Gets Into Your Resume
+
+```mermaid
+flowchart LR
+    JD([Job Description\nRequires: React Native]) --> V{Is it in\nMaster_Data?}
+    V -- ✅ Verified --> R[Added to resume\nbullet / skill line]
+    V -- ⚠️ Partial Match --> P[Added with\nhonest framing\ne.g. 'React.js']
+    V -- ❌ Not Found --> G[Reported as gap\nNEVER fabricated]
+
+    style JD fill:#4f46e5,color:#fff
+    style R fill:#16a34a,color:#fff
+    style P fill:#b45309,color:#fff
+    style G fill:#dc2626,color:#fff
+```
+
+---
+
+## ATS Scoring Loop
+
+```mermaid
+sequenceDiagram
+    participant A as AI Agent
+    participant M as match_resume.py
+    participant R as resume.pdf
+
+    A->>M: PRE run — shape skills order
+    M-->>A: verified_skills, required_first
+    A->>R: Build resume (pass 0)
+    A->>M: POST run + --baseline
+    M-->>A: score=72, needs_revision=true, verified_omitted=[Docker]
+    A->>R: Add Docker naturally (pass 1)
+    A->>M: POST run + --baseline
+    M-->>A: score=81, needs_revision=true, verified_omitted=[CI/CD]
+    A->>R: Add CI/CD naturally (pass 2)
+    A->>M: POST run + --baseline
+    M-->>A: score=88, needs_revision=false
+    A->>R: Final PDF locked ✅
+```
+
+---
+
+## Output: 4-File Application Folder
+
+Every completed job application produces **exactly 4 files** and nothing else. All intermediate build artifacts are automatically deleted.
+
+```
+Stripe - Backend Software Engineer/
+├── prompt.md              ← Your original job prompt (preserved, never modified)
+├── job-description.md     ← Clean copy of the full JD
+├── resume.pdf             ← 1-page tailored ATS resume
+└── job-match-report.pdf   ← Scoring breakdown, keyword analysis, gaps
+```
+
+---
+
 ## Instant Setup via AI Agent Prompt
 
 If you are using an AI-enabled IDE or Agent (such as **Antigravity**, **Cursor**, **Windsurf**, or **VS Code with AI Agent**), simply open your AI chat and paste this prompt:
@@ -29,11 +111,8 @@ The AI agent will automatically clone the repository, install Python dependencie
 - **Truth Engine Verification** — Validates every skill against your `Master_Data/` repository before adding it to the resume.
 - **1-Page Visual Guarantee** — Renders HTML/CSS via Headless Chrome (`--print-to-pdf`) to ensure crisp formatting and strict 1-page compliance.
 - **ATS Match & Scoring Engine** — Computes objective keyword match scores (0–100%) and exports a detailed `job-match-report.pdf`.
-- **Clean 4-File Application Isolation** — Every application receives a dedicated folder containing only 4 clean files:
-  1. `prompt.md` — Preserved input prompt
-  2. `job-description.md` — Clean job description
-  3. `resume.pdf` — 1-page tailored resume
-  4. `job-match-report.pdf` — Scoring & match report
+- **Revision Loop** — Up to 3 automated passes to improve score by naturally adding verified skills — never by fabricating.
+- **Clean 4-File Application Isolation** — Every application receives a dedicated folder containing only 4 clean files (see above).
 
 ---
 
@@ -66,14 +145,21 @@ source .venv/bin/activate
 pip install -r tools/requirements.txt
 ```
 
-### 3. Personalize `Master_Data/` (Your Source of Truth)
-Replace the placeholder files in `Master_Data/` with your verified background details:
-- `Master_Data/All_Info.md` — Complete contact details, work history, skills, and projects.
-- `Master_Data/Education_and_Skills.md` — Verified technical skills grouped into categories.
-- `Master_Data/Projects.md` — Verified project details, team sizes, tech stacks, and outcomes.
-- `Master_Data/Background.md` — Target roles and location preferences.
+### 3. Populate `Master_Data/` — Your Source of Truth
+
+> **See [`examples/Master_Data/`](examples/Master_Data/) for fully worked examples of every file.**
+
+Replace the placeholder files with **your verified background**. The agent will only use facts from these files — it will never invent anything not present here.
+
+| File | What to put in it |
+|------|-------------------|
+| `All_Info.md` | Contact details, work experience with real bullets, all projects, education, certifications |
+| `Projects.md` | Project titles (exact, never change), tech stacks (exact), and bullet descriptions |
+| `Education_and_Skills.md` | Degrees, institutions, verified technical skills by category |
+| `Background.md` | Target roles and core focus areas |
 
 ### 4. Update the Agent Rule File
+
 Edit `.agents/rules/resume-customization.md` **Section 3** with your real verified facts:
 - Replace all `[Candidate Name]`, `[email@example.com]`, `[Phone Number]`, school names, employers, and project titles with your actual verified information.
 - `Master_Data/` (Step 3) is the **content source of truth** — it drives every bullet, skill, and project on the resume.
@@ -82,6 +168,8 @@ Edit `.agents/rules/resume-customization.md` **Section 3** with your real verifi
 ---
 
 ## Generating a Tailored Resume via AI Agent
+
+> **See [`examples/job_prompt_example.md`](examples/job_prompt_example.md) for a fully filled example.**
 
 Whenever you want to apply for a new job, paste this prompt into your AI Agent:
 
@@ -103,8 +191,20 @@ The AI Agent will automatically:
 1. Parse the JD and run PRE-mode keyword analysis.
 2. Tailor your resume strictly using verified facts from `Master_Data/`.
 3. Compile a 1-page `resume.pdf` via Headless Chrome.
-4. Run POST-mode ATS scoring and optimization passes.
+4. Run POST-mode ATS scoring and revision passes (up to 3).
 5. Produce `job-match-report.pdf` and clean up all temporary build files.
+
+---
+
+## ATS Score Verdicts
+
+| Score | Verdict | What it means |
+|-------|---------|---------------|
+| 90–100 | ✅ **Good Fit** | Strong keyword alignment, apply with confidence |
+| 60–89 | ⚠️ **Acceptable Fit** | Reasonable match; gaps are named in the report |
+| < 60 | ❌ **Weak Fit** | Honest mismatch; report shows what verified evidence is missing |
+
+> The engine will never fabricate skills to chase a higher score. Stopping at 65 because of genuine gaps is correct, expected behaviour.
 
 ---
 
@@ -116,24 +216,30 @@ agentic-resume-engine/
 │   └── rules/
 │       ├── resume-customization.md       ← Core agent rules (edit Section 3 with your facts)
 │       └── resume-match-and-standards.md ← Match scoring & impact standards
-├── Master_Data/
-│   ├── All_Info.md                       ← Your complete verified background
-│   ├── Projects.md                       ← Your verified projects & tech stacks
-│   ├── Education_and_Skills.md           ← Verified skills by category
-│   └── Background.md                    ← Target role preferences
+├── Master_Data/                          ← YOUR verified background (source of truth)
+│   ├── All_Info.md
+│   ├── Projects.md
+│   ├── Education_and_Skills.md
+│   └── Background.md
 ├── tools/
 │   ├── master_resume_template.html       ← Canonical HTML resume template
 │   ├── master_resume_template.tex        ← Canonical LaTeX resume template
-│   ├── match_resume.py                   ← JD vs Master_Data match engine
+│   ├── match_resume.py                   ← JD vs Master_Data match engine (entry point)
 │   ├── jobmatch.py                       ← Core matching logic
 │   ├── sync_excel.py                     ← Application tracker (Excel)
 │   ├── skills_extra.json                 ← Skill alias & synonym map
 │   ├── MATCH_RULES.md                    ← Match tool usage rules
 │   └── requirements.txt                  ← Python dependencies
 ├── AJDPrompts/
-│   └── Prompt.md                         ← Drop new job prompts here
-├── .gitattributes                        ← Cross-platform line endings
+│   └── Prompt.md                         ← Job application prompt template
+├── examples/                             ← 📚 Fully worked examples for new users
+│   ├── Master_Data/
+│   │   ├── All_Info.md                   ← Example: Jane Doe (fictional candidate)
+│   │   └── Projects.md                   ← Example: project entries format
+│   └── job_prompt_example.md             ← Example: Stripe Backend Engineer job prompt
+├── .gitattributes
 ├── .gitignore
+├── LICENSE
 └── README.md
 ```
 
