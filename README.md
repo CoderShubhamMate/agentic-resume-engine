@@ -41,7 +41,7 @@ The AI agent will automatically clone the repository, install Python dependencie
 
 - **Python 3.10+**
 - **Google Chrome** (for headless PDF generation)
-- **AI Coding Assistant** (Antigravity, Gemini, Claude, Cursor, or Windsurf) capable of reading `.agents/rules/`
+- **AI Coding Assistant** with agent/rules support — e.g. [Antigravity](https://antigravity.dev), [Cursor](https://cursor.com), [Windsurf](https://windsurf.com), or VS Code with an AI agent extension
 
 ---
 
@@ -73,10 +73,11 @@ Replace the placeholder files in `Master_Data/` with your verified background de
 - `Master_Data/Projects.md` — Verified project details, team sizes, tech stacks, and outcomes.
 - `Master_Data/Background.md` — Target roles and location preferences.
 
-### 4. Update Rule Files
+### 4. Update the Agent Rule File
 Edit `.agents/rules/resume-customization.md` **Section 3** with your real verified facts:
-- Replace all `[Candidate Name]`, `[email@example.com]`, `[Phone Number]` etc. with your actual verified information.
-- This is the only file you edit; `Master_Data/` is the source of truth for content.
+- Replace all `[Candidate Name]`, `[email@example.com]`, `[Phone Number]`, school names, employers, and project titles with your actual verified information.
+- `Master_Data/` (Step 3) is the **content source of truth** — it drives every bullet, skill, and project on the resume.
+- Section 3 of the rule file is the **fixed contact/identity block** the agent reads directly — both must be kept in sync.
 
 ---
 
@@ -95,7 +96,7 @@ Whenever you want to apply for a new job, paste this prompt into your AI Agent:
 > Job Description:
 > [Paste full raw job description here]
 >
-> Please write this to AJDPrompts/Prompt.md and process the resume generation pipeline.
+> Please process the full resume generation pipeline for this job.
 > ```
 
 The AI Agent will automatically:
