@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Template</title>
+    <style>
+        @page {
+            size: letter;
+            margin: 0.35in 0.4in 0.3in 0.4in;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #111111;
+            line-height: 1.32;
+            font-size: 8.6pt;
+            background: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        h1 {
+            font-size: 19pt;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+            color: #000000;
+        }
+        .contact-info {
+            font-size: 8.6pt;
+            color: #222222;
+        }
+        .contact-info span {
+            margin: 0 4px;
+        }
+        .contact-info a {
+            color: #000000;
+            text-decoration: underline;
+        }
+        
+        /* Exact \cvsection Layout */
+        .cvsection-row {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .cvsection-left {
+            width: 22%;
+            padding-right: 10px;
+            flex-shrink: 0;
+        }
+        .left-thick-rule {
+            height: 3.5px;
+            background-color: #d9d9d9;
+            width: 90%;
+            margin-bottom: 3px;
+        }
+        .cvsection-left h2 {
+            font-size: 8.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000000;
+            letter-spacing: 0.2px;
+        }
+        .cvsection-right {
+            width: 78%;
+            flex-grow: 1;
+        }
+        .right-thin-rule {
+            border-top: 0.5pt solid #111111;
+            margin-bottom: 3px;
+            margin-top: 0px;
+        }
+        
+        .summary-text {
+            text-align: justify;
+            font-size: 8.6pt;
+            line-height: 1.32;
+        }
+        
+        .skills-content {
+            font-size: 8.6pt;
+            line-height: 1.35;
+        }
+        .skills-content strong {
+            font-weight: 700;
+            color: #000000;
+        }
+        
+        .job-entry, .project-entry {
+            margin-bottom: 4px;
+        }
+        .job-entry:last-child, .project-entry:last-child {
+            margin-bottom: 0;
+        }
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 8.6pt;
+        }
+        .job-role-title {
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000000;
+        }
+        .company-name {
+            font-weight: 400;
+            color: #111111;
+        }
+        .project-title {
+            font-weight: 700;
+            color: #000000;
+        }
+        .location-line {
+            font-size: 8.4pt;
+            color: #222222;
+            margin-bottom: 1.5px;
+        }
+        .date-location {
+            font-size: 8.4pt;
+            font-style: italic;
+            color: #333333;
+            text-align: right;
+        }
+        ul.bullet-list {
+            list-style-type: disc;
+            padding-left: 14px;
+            margin-top: 1.5px;
+        }
+        ul.bullet-list li {
+            margin-bottom: 1.5px;
+            font-size: 8.6pt;
+            text-align: justify;
+        }
+        .tech-stack {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 8.4pt;
+            color: #333333;
+        }
+        .edu-entry {
+            margin-bottom: 3px;
+        }
+        .edu-school {
+            font-weight: 700;
+            font-size: 8.6pt;
+            color: #000000;
+        }
+        .edu-degree {
+            font-weight: 400;
+            font-size: 8.6pt;
+        }
+        .cert-text {
+            font-size: 8.6pt;
+            color: #111111;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>[FULL NAME]</h1>
+            <div class="contact-info">
+                [City, State/Country] <span>|</span> [Phone Number] <span>|</span> <a href="mailto:[email@example.com]">[email@example.com]</a> <span>|</span> <a href="https://linkedin.com/in/[linkedin-id]">LinkedIn</a> <span>|</span> <a href="https://github.com/[github-id]">GitHub</a>
+            </div>
+        </header>
+
+        <!-- PROFESSIONAL SUMMARY -->
+        <div class="cvsection-row">
+            <div class="cvsection-left">
+                <div class="left-thick-rule"></div>
+                <h2>PROFESSIONAL SUMMARY</h2>
+            </div>
+            <div class="cvsection-right">
+                <div class="right-thin-rule"></div>
+                <p class="summary-text">
+                    [TAILORED PROFESSIONAL SUMMARY HERE]
+                </p>
+            </div>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="cvsection-row">
+            <div class="cvsection-left">
+                <div class="left-thick-rule"></div>
+                <h2>SKILLS</h2>
+            </div>
+            <div class="cvsection-right">
+                <div class="right-thin-rule"></div>
+                <div class="skills-content">
+                    <div><strong>Languages:</strong> [LANGUAGES]</div>
+                    <div><strong>Core Concepts:</strong> [CORE CONCEPTS]</div>
+                    <div><strong>APIs &amp; Backend:</strong> [APIS & BACKEND]</div>
+                    <div><strong>Databases &amp; Tools:</strong> [DATABASES & TOOLS]</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WORK HISTORY -->
+        <div class="cvsection-row">
+            <div class="cvsection-left">
+                <div class="left-thick-rule"></div>
+                <h2>WORK HISTORY</h2>
+            </div>
+            <div class="cvsection-right">
+                <div class="right-thin-rule"></div>
+                <div class="job-entry">
+                    <div class="entry-header">
+                        <div><span class="job-role-title">[ROLE TITLE 1]</span> <span>|</span> <span class="company-name">[Company Name 1]</span></div>
+                        <div class="date-location">[MM/YYYY to MM/YYYY]</div>
+                    </div>
+                    <div class="location-line">[Location 1]</div>
+                    <ul class="bullet-list">
+                        <li>[Accomplishment bullet 1 highlighting technology and result].</li>
+                        <li>[Accomplishment bullet 2 highlighting technology and result].</li>
+                        <li>[Accomplishment bullet 3 highlighting technology and result].</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="cvsection-row">
+            <div class="cvsection-left">
+                <div class="left-thick-rule"></div>
+                <h2>PROJECTS</h2>
+            </div>
+            <div class="cvsection-right">
+                <div class="right-thin-rule"></div>
+                <div class="project-entry">
+                    <div class="entry-header">
+                        <div><span class="project-title">[Project Title 1]</span> <span class="tech-stack">| [Tech Stack 1]</span></div>
+                    </div>
+                    <ul class="bullet-list">
+                        <li>[Project accomplishment bullet 1].</li>
+                        <li>[Project accomplishment bullet 2].</li>
+                    </ul>
+                </div>
+                <div class="project-entry" style="margin-top: 5px;">
+                    <div class="entry-header">
+                        <div><span class="project-title">[Project Title 2]</span> <span class="tech-stack">| [Tech Stack 2]</span></div>
+                    </div>
+                    <ul class="bullet-list">
+                        <li>[Project accomplishment bullet 1].</li>
+                        <li>[Project accomplishment bullet 2].</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="cvsection-row">
+            <div class="cvsection-left">
+                <div class="left-thick-rule"></div>
+                <h2>EDUCATION</h2>
+            </div>
+            <div class="cvsection-right">
+                <div class="right-thin-rule"></div>
+                <div class="edu-entry">
+                    <div class="edu-school">[University / College Name]</div>
+                    <div class="edu-degree">[Degree Name, Major, Graduated Month Year]</div>
+                </div>
+                <div class="edu-entry" style="margin-top: 2px;">
+                    <div class="edu-school">[Polytechnic / High School Name]</div>
+                    <div class="edu-degree">[Diploma / Certificate Name, Score, Graduated Year]</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <div class="cvsection-row" style="margin-bottom: 0;">
+            <div class="cvsection-left">
+                <div class="left-thick-rule"></div>
+                <h2>CERTIFICATIONS</h2>
+            </div>
+            <div class="cvsection-right">
+                <div class="right-thin-rule"></div>
+                <div class="cert-text">
+                    [Certification 1] <span>|</span> [Certification 2] <span>|</span> [Certification 3]
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

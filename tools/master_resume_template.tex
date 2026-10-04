@@ -1,0 +1,82 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[left=0.5in, right=0.5in, top=0.5in, bottom=0.5in]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\pagestyle{empty}
+\definecolor{lightgray}{gray}{0.85}
+
+\newcommand{\cvsection}[2]{
+    \vspace{6pt}
+    \noindent
+    \begin{minipage}[t]{0.22\textwidth}
+        \vspace{0pt} 
+        {\color{lightgray}\rule{0.9\linewidth}{4pt}}\par
+        \vspace{2pt}\small\textbf{\uppercase{#1}}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.75\textwidth}
+        \vspace{0pt} 
+        \vspace{-2.5pt}\rule{\linewidth}{0.5pt}\par
+        \vspace{2pt}\small #2
+    \end{minipage}
+}
+
+\begin{document}
+
+\begin{center}
+    {\huge \textbf{[FULL NAME]}} \\[4pt]
+    \small [City, State/Country] $|$ [Phone Number] $|$ \href{mailto:[email@example.com]}{[email@example.com]} $|$ \href{https://linkedin.com/in/[linkedin-id]}{LinkedIn} $|$ \href{https://github.com/[github-id]}{GitHub}
+\end{center}
+\vspace{6pt}
+
+\cvsection{Professional Summary}{
+    [TAILORED PROFESSIONAL SUMMARY HERE]
+}
+
+\cvsection{Skills}{
+    \textbf{Languages:} [LANGUAGES HERE] \newline
+    \textbf{Core Concepts:} [CORE CONCEPTS HERE] \newline
+    \textbf{APIs \& Backend:} [APIS & BACKEND HERE] \newline
+    \textbf{Databases \& Tools:} [DATABASES & TOOLS HERE]
+}
+
+\cvsection{Work History}{
+    \textbf{[ROLE TITLE 1]} $|$ [Company Name 1] \hfill \textit{[MM/YYYY to MM/YYYY]} \newline
+    [Location 1]
+    \begin{itemize}[leftmargin=*, nosep, topsep=2pt]
+        \item [Accomplishment bullet 1 highlighting technology and result].
+        \item [Accomplishment bullet 2 highlighting technology and result].
+        \item [Accomplishment bullet 3 highlighting technology and result].
+    \end{itemize}
+}
+
+\cvsection{Projects}{
+    \textbf{[Project Title 1]} $|$ \textit{[Tech Stack 1]}
+    \begin{itemize}[leftmargin=*, nosep, topsep=2pt]
+        \item [Project accomplishment bullet 1].
+        \item [Project accomplishment bullet 2].
+    \end{itemize}
+    \vspace{6pt}
+    \textbf{[Project Title 2]} $|$ \textit{[Tech Stack 2]}
+    \begin{itemize}[leftmargin=*, nosep, topsep=2pt]
+        \item [Project accomplishment bullet 1].
+        \item [Project accomplishment bullet 2].
+    \end{itemize}
+}
+
+\cvsection{Education}{
+    \textbf{[University / College Name]} \newline
+    [Degree Name, Major, Graduated Month Year] \vspace{4pt}\newline
+    \textbf{[Polytechnic / High School Name]} \newline
+    [Diploma / Certificate Name, Score, Graduated Year]
+}
+
+\cvsection{Certifications}{
+    [Certification 1] $|$ [Certification 2] $|$ [Certification 3]
+}
+
+\end{document}

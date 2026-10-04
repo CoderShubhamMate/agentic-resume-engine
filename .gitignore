@@ -1,0 +1,25 @@
+# Python virtual environments & bytecode
+.venv/
+venv/
+ENV/
+__pycache__/
+*.pyc
+
+# Node modules & logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Application Build Artifacts & Temporary Work Directories
+_match_work/
+scratch/
+
+# Ignore generated job folders (uncomment if you want to keep generated application folders local only)
+# /* - */
