@@ -13,7 +13,7 @@ If you are using an AI-enabled IDE or Agent (such as **Antigravity**, **Cursor**
 > **Copy & Paste Prompt into your AI Agent:**
 > ```text
 > Clone the Agentic Resume Engine repository from
-> https://github.com/YOUR-USERNAME/agentic-resume-engine.git,
+> https://github.com/CoderShubhamMate/agentic-resume-engine.git,
 > set up the Python environment (.venv) using tools/requirements.txt,
 > and guide me on updating the Master_Data/ files with my verified
 > background information so I can generate tailored 1-page ATS resumes!
@@ -49,7 +49,7 @@ The AI agent will automatically clone the repository, install Python dependencie
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/YOUR-USERNAME/agentic-resume-engine.git
+git clone https://github.com/CoderShubhamMate/agentic-resume-engine.git
 cd agentic-resume-engine
 ```
 
