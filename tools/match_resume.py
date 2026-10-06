@@ -195,10 +195,13 @@ def classify_skills(hard_skills, master_lines):
 # A7. FABRICATION CHECK: skills in resume but not in Master_Data
 # ---------------------------------------------------------------------------
 def fabrication_check(resume_text, master_lines):
+    # Strip 'Areas of Interest' section before checking for unverified skills
+    # to avoid false-positive fabrication warnings on declared learning interests
+    clean_text = re.split(r"(?i)\b(areas\s+of\s+interest|interests)\b", resume_text, maxsplit=1)[0]
     unverified = []
     for canon, aliases in jobmatch.SKILLS.items():
         pat = jobmatch.term_pattern([canon] + aliases)
-        if not pat.search(resume_text):
+        if not pat.search(clean_text):
             continue
         # Found in resume – is it in Master_Data?
         ev, _, _ = find_best_evidence(pat, master_lines)
