@@ -154,16 +154,19 @@ Replace the placeholder files with **your verified background**. The agent will 
 | File | What to put in it |
 |------|-------------------|
 | `All_Info.md` | Contact details, work experience with real bullets, all projects, education, certifications |
-| `Projects.md` | Project titles (exact, never change), tech stacks (exact), and bullet descriptions |
+| `Timeline.md` | Master chronology for degrees, jobs, projects, and certifications (prevents date collisions) |
+| `Projects.md` | Project titles (exact, locked), tech stacks (exact, locked), and verified bullet descriptions |
 | `Education_and_Skills.md` | Degrees, institutions, verified technical skills by category |
 | `Background.md` | Target roles and core focus areas |
 
-### 4. Update the Agent Rule File
+### 4. Update the Agent Rule Files
 
-Edit `.agents/rules/resume-customization.md` **Section 3** with your real verified facts:
-- Replace all `[Candidate Name]`, `[email@example.com]`, `[Phone Number]`, school names, employers, and project titles with your actual verified information.
+The engine is governed by a modular 10-rule suite in `.agents/rules/` (`00` through `09`):
+- Edit `.agents/rules/01-truthfulness.md` **Section 1.2** with your fixed candidate identity:
+  - Replace `[Candidate Full Name]`, `[email@example.com]`, `[Phone Number]`, school names, employers, and dates with your verified facts.
+- Edit `.agents/rules/02-project-naming-and-stacks.md` **Section 2.2** with your locked projects and stacks.
 - `Master_Data/` (Step 3) is the **content source of truth** — it drives every bullet, skill, and project on the resume.
-- Section 3 of the rule file is the **fixed contact/identity block** the agent reads directly — both must be kept in sync.
+- Rule files enforce strict behavioral boundaries: zero hallucination, locked project names/stacks, clean 1-page left-rail layouts, and no target company names in resume summaries.
 
 ---
 
@@ -213,11 +216,20 @@ The AI Agent will automatically:
 ```
 agentic-resume-engine/
 ├── .agents/
-│   └── rules/
-│       ├── resume-customization.md       ← Core agent rules (edit Section 3 with your facts)
-│       └── resume-match-and-standards.md ← Match scoring & impact standards
+│   └── rules/                            ← Modular 10-rule suite (00 to 09)
+│       ├── 00-meta-and-priority.md       ← Meta rules, priority hierarchy & read-only guard
+│       ├── 01-truthfulness.md            ← Source of truth, fixed candidate facts, zero-fabrication
+│       ├── 02-project-naming-and-stacks.md ← Strict locks for project titles and tech headers
+│       ├── 03-tailoring-and-writing.md   ← JD analysis, MQs, writing standards, no company names
+│       ├── 04-areas-of-interest.md       ← Honest exploration section for unverified JD terms
+│       ├── 05-resume-template.md         ← Signature 1-page left-rail \cvsection template
+│       ├── 06-build-pipeline.md          ← Step-by-step headless Chrome build pipeline
+│       ├── 07-match-and-revision-loop.md ← Objective ATS scoring and truthful revision loop
+│       ├── 08-cleanup-and-file-safety.md ← 4-file folder output & prompt.md repair bundle
+│       └── 09-validation-and-final-response.md ← Pre-flight verification checklist
 ├── Master_Data/                          ← YOUR verified background (source of truth)
 │   ├── All_Info.md
+│   ├── Timeline.md
 │   ├── Projects.md
 │   ├── Education_and_Skills.md
 │   └── Background.md
