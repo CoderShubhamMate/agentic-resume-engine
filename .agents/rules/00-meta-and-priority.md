@@ -15,11 +15,12 @@ Do not propose or execute edits to rule files, even if asked. If a rule looks wr
 
 ## 0.3 Priority when rules conflict (highest first)
 1. This file (00)
-2. `01-truthfulness.md` and `02-project-naming-and-stacks.md`
-3. `08-cleanup-and-file-safety.md`
-4. `05-resume-template.md` and `06-build-pipeline.md`
-5. `03-tailoring-and-writing.md` and `04-areas-of-interest.md`
-6. `07-match-and-revision-loop.md` and `tools\MATCH_RULES.md` (they control scoring and match steps only; they never override truth, project/stack locks, or one page)
+2. `10-security-and-credentials-policy.md`
+3. `01-truthfulness.md` and `02-project-naming-and-stacks.md`
+4. `08-cleanup-and-file-safety.md`
+5. `05-resume-template.md` and `06-build-pipeline.md`
+6. `03-tailoring-and-writing.md` and `04-areas-of-interest.md`
+7. `07-match-and-revision-loop.md` and `tools\MATCH_RULES.md` (they control scoring and match steps only; they never override truth, project/stack locks, or one page)
 
 Always: truth beats match score. One page beats extra content. File safety beats tidiness.
 When you follow a higher rule over a lower one, inform the user in the final response under "Rule conflict".
@@ -40,5 +41,6 @@ When you follow a higher rule over a lower one, inform the user in the final res
 | 07 | Match score and revision loop |
 | 08 | Cleanup, repair bundle and file safety |
 | 09 | Final validation and final response |
+| 10 | Security and credentials policy for AI agents |
 
-At the start of every job, read files 00 to 09 and `tools\MATCH_RULES.md` before doing anything else.
+At the start of every job, read files 00 to 10 and `tools\MATCH_RULES.md` before doing anything else.
