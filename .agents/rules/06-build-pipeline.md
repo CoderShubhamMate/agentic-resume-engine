@@ -38,10 +38,14 @@ Never overwrite or mix another application's files.
 15. Verify the folder contains exactly the 4 final files, then send the final response (09).
 
 ## 6.5 Compile command (pdflatex is not installed)
+Use the cross-platform compile tool which automatically detects Google Chrome / Chromium across Windows, macOS, and Linux:
 ```bash
-"C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="resume.pdf" "resume_render.html"
+python tools/compile_pdf.py --html resume_render.html --pdf resume.pdf
 ```
-*(On macOS/Linux, substitute `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome` or `google-chrome`)*
+Alternatively, invoke the headless browser command directly:
+- **Windows:** `"C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="resume.pdf" "file:///full/path/to/resume_render.html"`
+- **macOS:** `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="resume.pdf" "file:///full/path/to/resume_render.html"`
+- **Linux:** `google-chrome --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="resume.pdf" "file:///full/path/to/resume_render.html"`
 
 Every content change must be made in BOTH `resume.tex` and `resume_render.html`, then recompiled. A change in only one of them does not reach the PDF.
 
