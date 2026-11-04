@@ -4,13 +4,14 @@ trigger: always_on
 
 # 08 — CLEANUP, REPAIR BUNDLE AND FILE SAFETY
 
-## 8.1 Final folder contents (exactly 4 files)
+## 8.1 Final folder contents (4 core files + optional prep guide)
 - `prompt.md` — original prompt, plus the repair bundle (8.3) at the end
 - `job-description.md` — clean copy of the JD
 - `resume.pdf` — final compiled resume
 - `job-match-report.pdf` — match report (or omitted only if the match step was skipped, then say so)
+- *(Optional)* `<Company>_<Role>_Interview_Prep.pdf` / `.md` — companion interview preparation guide if requested by the user prompt.
 
-Nothing else stays in the folder.
+No temporary build artifacts remain in the folder.
 
 ## 8.2 Temporary build artifacts (removed only at the very end)
 `resume.tex`, `resume_render.html`, `job-match.json`, `job-match-baseline.json`, `jd-keywords.json`, `job-match-summary.md`, `_match_work\`, `_repair\`
