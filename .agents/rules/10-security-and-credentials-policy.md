@@ -23,3 +23,4 @@ When authorized by the user to interact with job application portals:
 - Review eligibility and job requirements factually.
 - Submit only verified information matching `Master_Data/`.
 - Never attempt to bypass authentication boundaries, solve CAPTCHAs via unsanctioned workarounds, or access unauthorized administrative endpoints.
+
