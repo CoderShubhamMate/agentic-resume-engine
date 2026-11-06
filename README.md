@@ -1,14 +1,18 @@
-# 📄 Agentic Resume Engine — AI ATS-Friendly Resume Builder & Job Description Tailor
+# ⚡ Agentic Resume Engine
 
-**Autonomous 5-Agent AI Resume Tailor & ATS Resume Builder powered by Google Gemini (`@google/genai` SDK), Python, Jinja2, and Headless Chrome.**
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://python.org)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)]()
+[![Zero Fabrication](https://img.shields.io/badge/Policy-Zero%20Fabrication-red.svg)]()
+[![Output](https://img.shields.io/badge/Output-1--Page%20ATS%20PDF-success.svg)]()
 
 An autonomous, agentic AI resume production pipeline that transforms job descriptions into **truthful**, **ATS-optimized**, **1-page PDF resumes** and companion **interview preparation guides** using your local AI coding assistant (Cursor, Antigravity, Windsurf, Claude Code, or VS Code) and Headless Chrome.
 
 > **Zero-Fabrication Contract**: This engine enforces a strict truth boundary. It tailors resumes strictly using verified facts from your personal `Master_Data/` files and **never** hallucinates skills, employers, projects, or metrics to artificially inflate match scores.
 
-## 🎯 Why Job Seekers Clone This ATS Resume Builder
+---
 
-The **Agentic Resume Engine** treats custom resume creation as an automated software compilation pipeline. Instead of spending 45+ minutes manually editing Word or LaTeX files for every job posting, you maintain one **Master Resume Data (`Master_Data/master_data.json`)** file containing your complete, verified career history.
+## 🌟 Why Agentic Resume Engine?
 
 Traditional AI resume generators frequently hallucinate credentials, invent fake percentages, or output multi-page documents that fail Applicant Tracking Systems (ATS).
 
@@ -22,14 +26,9 @@ Traditional AI resume generators frequently hallucinate credentials, invent fake
 - 🧠 **Companion Technical Interview Guides:** Automatically generates an 8-module technical systems engineering study guide for every application using `tools/generate_interview_prep.py`.
 - 💰 **Zero API Key Cost:** Runs directly with your existing AI coding assistant (Antigravity, Cursor, Windsurf, Claude, Copilot). No extra paid API subscriptions required.
 
-1. **Input Stage**: Raw Job Description (`jd.txt`) + Candidate Career Profile (`Master_Data/master_data.json`)
-2. **Agent 1 — JD Analyst (`AJDPrompts/jd-analyst.md`)**: Extracts core technical skills, domain keywords, required tenure, and soft skills into a structured JD profile.
-3. **Agent 2 — Section Planner (`AJDPrompts/section-planner.md`)**: Calculates strict visual line-budget limits per section to guarantee a single-page layout and selects your highest-impact items.
-4. **Agent 3 — Truth Engine (`AJDPrompts/truth-engine.md`)**: Enforces zero-hallucination governance—maps verified history to JD keywords without inventing roles, skills, or metrics.
-5. **Agent 4 — Resume Writer & Layout Guard (`AJDPrompts/resume-writer.md`)**: Compiles semantic HTML via Jinja2 templates (`tools/templates/`) with strict inline CSS formatting bounds.
-6. **Agent 5 — ATS Matcher & Auditor (`AJDPrompts/ats-matcher.md`)**: Audits the compiled resume against the target JD across 7 weighted ATS dimensions and outputs `job-match.json`.
+---
 
-### 🤖 The 5-Agent Pipeline Breakdown
+## 🏗️ Architecture & How It Works
 
 ```mermaid
 flowchart TD
@@ -48,14 +47,16 @@ flowchart TD
     K --> L["Generate Companion Interview Prep Guide\ntools/generate_interview_prep.py"]
     L --> M[("📁 Clean Application Package")]
 
-## 🔒 Truth Engine: Zero-Hallucination Resume Tailoring
+    style A fill:#4f46e5,color:#fff
+    style M fill:#16a34a,color:#fff
+    style D fill:#b45309,color:#fff
+    style C fill:#0f172a,color:#fff
+    style H fill:#0f172a,color:#fff
+```
 
-Unlike generic AI resume generators that invent fake skills to stuff keywords, the **Truth Engine** (`AJDPrompts/truth-engine.md`) enforces strict factual guardrails:
+---
 
-* **Verified Experience Only**: Every bullet point must originate from documented entries in `Master_Data/master_data.json`.
-* **Smart Action-Verb & Keyword Alignment**: Phrasing and technical context are dynamically tailored to mirror the employer's exact terminology where your background genuinely matches.
-* **Immutable Metrics**: Quantified impact numbers (percentages, latency reductions, revenue, scale) are preserved strictly as recorded in your master file.
-* **Honest Skill-Gap Handling**: If a job description requires a tool or skill you haven't used yet, the engine never fakes it in your Experience or Skills sections—instead, it surfaces relevant domain terms transparently under **Areas of Interest** (e.g., *"Interested in developing expertise in: Kubernetes, Distributed Systems"*).
+## 🛡️ Truth Engine: What Gets Into Your Resume
 
 ```mermaid
 flowchart LR
@@ -64,13 +65,15 @@ flowchart LR
     V -- "⚠️ Partial Match" --> P["Added with honest framing\ne.g. 'Docker, Containers'"]
     V -- "❌ Not Found" --> G["Reported as gap\nPlaced in 'Areas of Interest'\nNEVER fabricated"]
 
-### Prerequisites
+    style JD fill:#4f46e5,color:#fff
+    style R fill:#16a34a,color:#fff
+    style P fill:#b45309,color:#fff
+    style G fill:#dc2626,color:#fff
+```
 
-* **Python 3.10+**
-* **Google Gemini API Key** (`GEMINI_API_KEY`)
-* **Google Chrome** installed locally (used in headless mode for pixel-perfect PDF compilation)
+---
 
-### Step 1: Create Your Own Repository or Clone Locally
+## 📦 Output: Clean Application Package
 
 Every completed job application produces a pristine, isolated folder:
 
@@ -198,8 +201,7 @@ agentic-resume-engine/
 ### 1. Compile PDF via Headless Chrome (`tools/compile_pdf.py`)
 Auto-detects Google Chrome, Chromium, or Microsoft Edge across OS environments:
 ```bash
-git clone https://github.com/CoderShubhamMate/agentic-resume-engine.git
-cd agentic-resume-engine
+python tools/compile_pdf.py --html resume_render.html --pdf resume.pdf
 ```
 
 ### 2. ATS Match & Gap Scorer (`tools/match_resume.py`)
@@ -218,66 +220,19 @@ Generates an 8-module comprehensive systems engineering interview prep guide:
 python tools/generate_interview_prep.py --folder "Company - Role"
 ```
 
-### Step 4: Tailor Your Resume to Any Job Description
-
-1. Add your complete career history once inside `Master_Data/master_data.json`.
-2. Paste your target job posting into a text file (for example, `JDs/target_jd.txt`).
-3. Run the automated 5-agent compilation pipeline:
-
-```bash
-python tools/run_pipeline.py --jd JDs/target_jd.txt --master Master_Data/master_data.json
-```
-
-## 🛠 Repository Structure
-
-```text
-agentic-resume-engine/
-├── .agents/
-│   └── rules/           # Cursor / Agentic system rules
-├── AJDPrompts/          # Prompt templates for the 5 AI Agents
-│   ├── jd-analyst.md
-│   ├── section-planner.md
-│   ├── truth-engine.md
-│   ├── resume-writer.md
-│   └── ats-matcher.md
-├── Master_Data/         # Single source of truth for your career history
-│   └── master_data.json
-├── examples/            # Sample Job Descriptions and generated resume outputs
-├── tools/               # Pipeline runner & ATS-friendly Jinja2 HTML templates
-│   ├── run_pipeline.py
-│   └── templates/
-├── .gitattributes
-├── .gitignore
-├── LICENSE
-├── README.md
-└── setup.py
-```
-
-## ⚙️ Customization & Manual PDF Rendering
-
-* **Master Career Profile**: Edit `Master_Data/master_data.json` once with all your work experience, projects, education, technical skills, and certifications.
-* **Custom Resume Templates**: Tweak the Jinja2 HTML/CSS templates in `tools/templates/` to adjust typography, margins, or section order while keeping single-column ATS compatibility.
-* **Direct Headless Chrome PDF Export**: If you manually tweak `resume_render.html` and want to re-compile the PDF directly:
-  * **Windows:**
-    ```cmd
-    "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="resume.pdf" resume_render.html
-    ```
-  * **macOS:**
-    ```bash
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="resume.pdf" resume_render.html
-    ```
-  * **Linux:**
-    ```bash
-    google-chrome --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="resume.pdf" resume_render.html
-    ```
+---
 
 ## ❓ Frequently Asked Questions (FAQ)
 
-**Q: How does the ATS Matcher calculate my resume score?**  
-Agent 5 (`AJDPrompts/ats-matcher.md`) evaluates your tailored resume against the target job description on a 0–100% scale weighted across seven hiring criteria: **Hard Skills (40%)**, **Job Keywords (20%)**, **Text Similarity (10%)**, **Job Title Alignment (10%)**, **Experience Tenure (8%)**, **ATS Formatting (7%)**, and **Soft Skills (5%)**.
+<details>
+<summary><strong>Q: What happens if a job requires a skill I do not have?</strong></summary>
+The engine will never fabricate it in your Skills, Experience, or Projects sections. If the concept is relevant to the domain, it places it honestly into the <strong>Areas of Interest</strong> section (e.g., <em>"Interested in developing expertise in: Kubernetes, Distributed Systems"</em>). This allows you to surface relevant ATS keywords without being untruthful.
+</details>
 
-**Q: What if a job posting asks for a skill I don't have in `master_data.json`?**  
-The Truth Engine never fabricates unverified skills inside your Experience, Projects, or core Skills sections. Instead, if the skill is relevant to your target domain, it places it transparently under **Areas of Interest** so you capture legitimate keyword alignment without misrepresenting your background.
+<details>
+<summary><strong>Q: How do I restore build files after cleanup?</strong></summary>
+Every completed run embeds a <code>## REPAIR BUNDLE</code> at the bottom of <code>prompt.md</code> containing the full final <code>resume_render.html</code> and <code>job-match.json</code>. You can copy the HTML block directly to restore the editable source code at any time.
+</details>
 
 <details>
 <summary><strong>Q: How does the ATS Matcher score resumes?</strong></summary>
@@ -293,4 +248,4 @@ No. The engine is powered directly by your local AI coding assistant (Antigravit
 
 ## 📄 License
 
-Distributed under the [MIT License](https://github.com/CoderShubhamMate/agentic-resume-engine/blob/main/LICENSE). Feel free to clone, fork, and customize it for your job search!
+This project is licensed under the [MIT License](LICENSE).
