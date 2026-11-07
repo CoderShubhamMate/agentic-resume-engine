@@ -123,21 +123,71 @@ with my verified background information!
 
 ---
 
-## 🎯 How to Tailor a Resume for Any Job
+## 🤖 How to Use with Antigravity, Cursor & AI Coding Assistants
 
-1. Open `AJDPrompts/Prompt.md` and paste the Job Description along with company details.
-2. Tell your AI assistant:
-   ```text
-   Build a tailored application package for the job in AJDPrompts/Prompt.md 
-   following the rules in .agents/rules/.
-   ```
-3. The agent will autonomously:
-   - Run the PRE match check (`tools/match_resume.py --mode pre`).
-   - Draft the tailored resume adhering to line-budget constraints.
-   - Compile the 1-page PDF using `tools/compile_pdf.py`.
-   - Run the POST scoring loop (`tools/match_resume.py --mode post`).
-   - Generate the technical interview preparation guide (`tools/generate_interview_prep.py`).
-   - Archive the build files into `prompt.md` and deliver the finished package.
+The Agentic Resume Engine is engineered specifically to pair-program with modern autonomous coding agents. The agent autonomously reads the 10 immutable governance rules in `.agents/rules/`, uses your `Master_Data/` as ground truth, and executes the CLI tools in `tools/` without hallucinating experience.
+
+### 🌟 1. Google Antigravity
+Antigravity automatically discovers and obeys the rules in `.agents/rules/` across all conversation turns.
+* **Workflow:**
+  1. Open the repository root in Antigravity.
+  2. Paste your target Job Description into `AJDPrompts/Prompt.md`.
+  3. Send this instruction in the Antigravity chat:
+     ```text
+     Read .agents/rules/ and build a tailored application package for the job in AJDPrompts/Prompt.md. Strictly enforce the zero-fabrication contract and 1-page PDF guarantee.
+     ```
+  4. Antigravity will autonomously:
+     - Run `tools/match_resume.py --mode pre` to classify verified matches vs gaps.
+     - Author `resume.tex` and mirror it in `resume_render.html`.
+     - Compile `resume.pdf` using `tools/compile_pdf.py` with headless Chrome.
+     - Run the revision loop (`match_resume.py --mode post`) until the score reaches ≥ 90% or 3 truthful passes complete.
+     - Generate the companion 8-module systems engineering interview guide (`tools/generate_interview_prep.py`).
+     - Embed the disaster-proof `## REPAIR BUNDLE` into `prompt.md` and clean up temporary build artifacts.
+
+### ⚡ 2. Cursor (Agent Mode / Composer)
+* **Workflow:**
+  1. Open the repository in Cursor.
+  2. Open **Composer** (`Ctrl+I` on Windows/Linux or `Cmd+I` on macOS) and select **Agent Mode**.
+  3. Tag the rules and prompt:
+     ```text
+     @.agents/rules @AJDPrompts/Prompt.md Build the tailored resume package for this job following rules 00 through 10.
+     ```
+  4. Cursor will run the terminal commands, verify the layout constraints, and deliver the final application folder.
+
+### 🌊 3. Windsurf (Cascade Agent)
+* **Workflow:**
+  1. Open the project in Windsurf and switch to Cascade.
+  2. Send:
+     ```text
+     Follow the pipeline in .agents/rules/ to tailor my resume for the job in AJDPrompts/Prompt.md using Master_Data as the single source of truth.
+     ```
+
+### 💻 4. Claude Code / CLI Coding Agents
+* **Workflow:**
+  1. Launch `claude` or your preferred terminal agent in the repository root:
+     ```bash
+     claude
+     ```
+  2. Prompt:
+     ```text
+     Follow the step-by-step build pipeline in .agents/rules/06-build-pipeline.md to create the application package for AJDPrompts/Prompt.md.
+     ```
+
+---
+
+## 🎯 Step-by-Step Resume Tailoring Walkthrough
+
+Here is what happens during a complete resume tailoring run:
+
+| Step | Phase | Autonomous Agent Action | Tool / Target |
+| :---: | :--- | :--- | :--- |
+| **1** | **Input** | Paste target company name, role title, and raw JD text | `AJDPrompts/Prompt.md` |
+| **2** | **Pre-Scoring** | Extracts MQs, hard skills, ATS keywords; checks against verified history | `python tools/match_resume.py --mode pre --folder "<Company> - <Role>"` |
+| **3** | **Drafting** | Authors semantic ATS HTML (`resume_render.html`) and LaTeX (`resume.tex`) | Adheres strictly to `tools/master_resume_template.html` |
+| **4** | **Compilation** | Compiles selectable-text PDF using Headless Chrome print engine | `python tools/compile_pdf.py --html resume_render.html --pdf resume.pdf` |
+| **5** | **Post-Scoring** | Audits output ATS match score (0–100%) and runs up to 3 revision passes | `python tools/match_resume.py --mode post --folder "<Company> - <Role>"` |
+| **6** | **Interview Prep** | Generates companion 8-module deep technical interview preparation guide | `python tools/generate_interview_prep.py --folder "<Company> - <Role>"` |
+| **7** | **Safety & Cleanup** | Serializes final HTML and match score into `## REPAIR BUNDLE` inside `prompt.md` | Cleans temporary build files, leaving exactly 4 production deliverables |
 
 ---
 
